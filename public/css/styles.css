@@ -1,6 +1,230 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+*{
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background-image: url("../images/site/small_check.jpg");
+}
+
+#wrapper {
+  margin: 30px 100px;
+  background-color: #FFF;
+  border: 5px solid blue;
+  border-radius: 7px;
+}
+
+/*** Header ***/
+
+#top-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.siteName{
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.siteName a{
+  text-decoration: none;
+  color: black;
+}
+
+#tools a{
+  font-size: 20px;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+/*** Navigation ***/
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 20px 30px;
+  background-color: #1C1C1C;
+  margin: 10px 20px;
+  border-radius: 5px;
+}
+
+nav ul li {
+  color: #FFF;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/*** Main ***/
+
+.container{
+  padding: 20px;
+}
+
+.container h1 {
+  font-size: 40px;
+}
+
+.car-image{
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 12px;
+}
+
+.car-image img {
+  width: 100%;
+}
+
+.delorean-info {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 200px;
+  padding: 20px;
+  background-color: #e6e3e3;
+  opacity: 0.8;
+}
+
+.delorean-info ul {
+  list-style-type: none;
+}
+
+.delorean-info h2 {
+  color: blue;
+  padding-bottom: 4px;
+}
+
+.delorean-info ul li {
+  font-size: 18px;
+  padding-bottom: 2px;
+  color: blue;
+  font-weight: 700;
+}
+
+.delorean-info button {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  background-color: blue;
+  color: white;
+}
+
+.grid-info{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 100px;
+  gap: 100px;
+}
+
+.upgrades {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.upgrades figure {
+  width: 40%;
+  text-align: center;
+  padding: 15px;
+  background-color: blue;
+  border-radius: 7px;
+}
+
+.upgrades figure figcaption {
+  color: white;
+  font-weight: 700;
+}
+
+.reviews {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.reviews ul {
+  margin-top: 20px;
+  line-height: 3;
+}
+
+/*** Footer ***/
+
+footer {
+  margin: 15px;
+}
+
+footer p {
+  font-size: 16px;
+  color: #7c7878;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 600px){
+  body {
+    background-image: none;
+  }
+
+  #wrapper {
+    margin: 0;
+    border: none;
+    border-radius: 0%;
+  }
+
+  .siteName {
+    font-size: 30px;
+  }
+
+  nav ul {
+    margin: 0;
+  }
+
+  nav ul li {
+    font-size: 16px;
+  }
+
+  .container h1 {
+    font-size: 24px;
+  }
+
+  .delorean-info {
+    top: 35%;
+    left: 4%;
+    padding: 8px;
+    border-radius: 3px;
+    width: auto;
+  }
+
+  .grid-info {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 30px;
+    margin-top: 180px;
+  }
+
+  .upgrades {
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+
+  .reviews {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  .reviews ul {
+    padding: 20px;
+  }
+
 }
