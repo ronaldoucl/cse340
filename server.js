@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const baseController = require("./controllers/baseController")
+const intentionalErrorRoute = require("./routes/intentionalErrorRoute.js");
 
 
 /* ***********************
@@ -25,13 +26,12 @@ app.set("layout", "./layouts/layout")
  * Routes
  *************************/
 app.use(static)
+//Index Route
+app.get("/", baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
-//Index Route
-/*app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
-})*/
-app.get("/", baseController.buildHome)
+// Intentional error route. Used for testing
+app.use("/ierror", intentionalErrorRoute);
 
 /* ***********************
  * Local Server Information

@@ -15,9 +15,6 @@ if (process.env.NODE_ENV == "development") {
     },
 })
 
- console.log(process.env.DATABASE_URL)
- console.log(process.env.HOST)
-
 // Added for troubleshooting queries
 // during development
 module.exports = {
