@@ -323,6 +323,14 @@ footer p {
   content: "> ";
 }
 
+#tools a {
+  display: block;
+}
+
+#tools a:hover {
+  text-decoration: underline;
+}
+
 /* Login form  */
 .account-container {
   display: flex;

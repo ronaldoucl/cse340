@@ -92,6 +92,7 @@ async function buildLogin(req, res, next) {
  *  Process login post request
  * ************************************ */
 async function accountLogin(req, res) {
+  console.log(req.body)
   let nav = await utilities.getNav();
   const { account_email, account_password } = req.body;
   const accountData = await accountModel.getAccountByEmail(account_email);
