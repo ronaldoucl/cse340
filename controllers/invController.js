@@ -5,9 +5,6 @@ const invCont = {};
 
 /**
  * Build inventory by classification view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId;
@@ -34,9 +31,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
 
 /**
  * Build the view to display a single vehicle
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildByInventoryId = async function (req, res, next) {
   const inventoryId = req.params.inventoryId;
@@ -76,13 +70,9 @@ invCont.buildManagementView = async function (req, res, next) {
 
 /**
  * Build the add classification view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav();
-
   res.render("inventory/addClassification", {
     title: "Add New Classification",
     nav,
@@ -91,14 +81,12 @@ invCont.buildAddClassification = async function (req, res, next) {
 };
 /**
  * Handle post request to add a vehicle classification
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.addClassification = async function (req, res, next) {
   const { classification_name } = req.body;
 
   const response = await invModel.addClassification(classification_name); // ...to a function within the inventory model...
+  const classificationSelect = await utilities.buildClassificationList();
   let nav = await utilities.getNav(); // After query, so it shows new classification
   if (response) {
     req.flash(
@@ -110,6 +98,7 @@ invCont.addClassification = async function (req, res, next) {
       errors: null,
       nav,
       classification_name,
+      classificationSelect,
     });
   } else {
     req.flash("notice", `Failed to add ${classification_name}`);
@@ -124,9 +113,6 @@ invCont.addClassification = async function (req, res, next) {
 
 /**
  * Build the add inventory view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildAddInventory = async function (req, res, next) {
   const nav = await utilities.getNav();
@@ -142,9 +128,6 @@ invCont.buildAddInventory = async function (req, res, next) {
 
 /**
  * Handle post request to add a vehicle to the inventory along with redirects
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.addInventory = async function (req, res, next) {
   const nav = await utilities.getNav();
@@ -206,7 +189,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
   const invData = await invModel.getInventoryByClassificationId(
     classification_id
   );
-  if (invData[0].inv_id) {
+  if (Array.isArray(invData) && invData.length > 0 && invData[0].inv_id) {
     return res.json(invData);
   } else {
     next(new Error("No data returned"));
@@ -215,16 +198,13 @@ invCont.getInventoryJSON = async (req, res, next) => {
 
 /**
  * Build the edit inventory view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildEditInventory = async function (req, res, next) {
   const inventory_id = parseInt(req.params.inventoryId);
   const nav = await utilities.getNav();
 
   const inventoryData = (
-    await invModel.getInventoryByInventoryId(inventory_id))[0]; // Change this function to return the first item
+    await invModel.getInventoryByInventoryId(inventory_id))[0]; 
   const name = `${inventoryData.inv_make} ${inventoryData.inv_model}`;
 
   let classifications = await utilities.buildClassificationList(inventoryData.classification_id);
@@ -250,9 +230,6 @@ invCont.buildEditInventory = async function (req, res, next) {
 
 /**
  * Handle post request to update a vehicle to the inventory along with redirects
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.updateInventory = async function (req, res, next) {
   const nav = await utilities.getNav();
@@ -317,9 +294,6 @@ invCont.updateInventory = async function (req, res, next) {
 
 /**
  * Build the delete inventory view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildDeleteInventory = async function (req, res, next) {
   const inventory_id = parseInt(req.params.inventoryId);
@@ -346,9 +320,6 @@ invCont.buildDeleteInventory = async function (req, res, next) {
 
 /**
  * Handle post request to delete a vehicle from the inventory along with redirects
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.deleteInventory = async function (req, res, next) {
   const nav = await utilities.getNav();

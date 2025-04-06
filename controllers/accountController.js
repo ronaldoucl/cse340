@@ -4,7 +4,6 @@ require("dotenv").config();
 
 const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
-const messageModel = require("../models/message-model");
 
 
 /* ****************************************
@@ -131,13 +130,11 @@ async function accountLogin(req, res) {
  */
 async function buildAccountManagementView(req, res) {
   let nav = await utilities.getNav();
-  const unread = await messageModel.getMessageCountById(res.locals.accountData.account_id);
 
   res.render("account/account-management", {
     title: "Account Management",
     nav,
     errors: null,
-    unread, 
   });
   return; 
 }

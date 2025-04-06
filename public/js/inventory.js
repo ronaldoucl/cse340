@@ -8,6 +8,7 @@ listChange(); // Do it once on load.
 
 function listChange() {
     let classification_id = classificationList.value;
+    console.log(classification_id)
     let classIdURL = "/inv/getInventory/" + classification_id;
     fetch(classIdURL)
         .then(function (response) {
