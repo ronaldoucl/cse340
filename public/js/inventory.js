@@ -31,10 +31,10 @@ function buildInventoryList(data) {
     let inventoryDisplay = document.getElementById("inventoryDisplay");
     // Set up the table labels
     let dataTable = "<thead>";
-    dataTable += "<tr><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>";
+    dataTable += "<tr><th>Vehicle Name</th><th>&nbsp;</th><th>&nbsp;</th></tr>";
     dataTable += "</thead>";
     // Set up the table body
-    dataTable += "<tbody>";
+    dataTable += "<tbody class='vehicle-info'>";
     // Iterate over all vehicles in the array and put each in a row
     data.forEach(function (element) {
         dataTable += `<tr><td>${element.inv_make} ${element.inv_model}</td>`;

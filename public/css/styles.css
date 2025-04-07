@@ -543,6 +543,24 @@ table thead tr th {
   text-decoration: none;
 }
 
+.vehicle-info tr td {
+  font-family: "Poppins", sans-serif !important;
+  margin-bottom: 10px;
+}
+
+.vehicle-info tr td a {
+  font-family: "Poppins", sans-serif !important;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.vehicle-info tr td a:hover {
+  text-decoration: underline;
+}
+
+
 
 @media screen and (max-width: 600px){
   body {
