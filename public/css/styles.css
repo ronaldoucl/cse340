@@ -340,7 +340,8 @@ footer p {
 
 /* Login form  */
 .account-container,
-.account-management {
+.account-management,
+.inbox-container {
   display: flex;
   flex-direction: column;
   justify-content: center; 
@@ -560,7 +561,86 @@ table thead tr th {
   text-decoration: underline;
 }
 
+/* Inbox */
 
+.inbox-container h1 {
+  font-family: "Roboto Slab", serif;
+}
+
+.inbox-container ul {
+  margin: 20px;
+}
+
+.inbox-container ul li {
+  list-style: none;
+  margin: 8px;
+}
+
+.inbox-container ul li a {
+  font-size: 22px;
+}
+
+.inbox-container ul li a,
+.inbox-container table tbody tr td a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #114785;
+}
+
+.inbox-container ul li a:hover,
+.inbox-container table tbody tr td a:hover {
+  text-decoration: underline;
+}
+
+.inbox-container table {
+  width: 90%;
+}
+
+.inbox-container table tbody tr td {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+/* Message View */
+
+.message-view-container{
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.message-view-container h1 {
+  text-align: center;
+  margin: 24px;
+  font-family: "Roboto Slab", serif;
+}
+
+.message-view { 
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 3px;
+}
+
+.message-meta {
+  margin: 4px;
+  background-color: rgb(212, 212, 212);
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.message-pane {
+  margin: 4px;
+  background-color: rgb(179, 235, 252);
+  border-radius: 4px;
+  padding: 5px;
+  min-height: 200px;
+  height: auto;
+}
+
+.button-strip {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 @media screen and (max-width: 600px){
   body {

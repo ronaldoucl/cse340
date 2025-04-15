@@ -17,5 +17,13 @@
   <p><a href="/inv/">Manage Inventory</a></p>
   <% } %>
 
+  <% if(locals.loggedin) { %>
+    <div>
+      <h3>Messaging Center</h3>
+      <p>You have <strong><%- unread %></strong> new messages</p>
+      <a href="/message">Inbox</a>  
+    </div>
+  <% } %>
+
   <h3 class="logged-in">You're logged in!</h3>
 </div>

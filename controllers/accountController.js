@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
+const messageModel = require("../models/message-model");
 
 
 /* ****************************************
@@ -91,7 +92,6 @@ async function buildLogin(req, res, next) {
  *  Process login post request
  * ************************************ */
 async function accountLogin(req, res) {
-  console.log(req.body)
   let nav = await utilities.getNav();
   const { account_email, account_password } = req.body;
   const accountData = await accountModel.getAccountByEmail(account_email);
@@ -112,9 +112,9 @@ async function accountLogin(req, res) {
       utilities.updateCookie(accountData, res);
      
       return res.redirect("/account/");
-    } // Need to have a wrong password option
+    } 
     else {
-      req.flash("notice", "Please check your credentials and try again."); // Login was hanging with bad password but correct id
+      req.flash("notice", "Please check your credentials and try again.");
       res.redirect("/account/");
     }
   } catch (error) {
@@ -124,17 +124,16 @@ async function accountLogin(req, res) {
 
 /**
  * Process account management get request
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 async function buildAccountManagementView(req, res) {
   let nav = await utilities.getNav();
+  const unread = await messageModel.getMessageCountById(res.locals.accountData.account_id);
 
   res.render("account/account-management", {
     title: "Account Management",
     nav,
     errors: null,
+    unread, 
   });
   return; 
 }
@@ -197,13 +196,10 @@ async function updateAccount(req, res) {
       `Congratulations, you've updated ${account_firstname}.`
     );
 
-    //Update the cookie accountData
-    // TODO: Better way to do this?
-
-    const accountData = await accountModel.getAccountById(account_id); // Get it from db so we can remake the cookie
+    const accountData = await accountModel.getAccountById(account_id); 
     delete accountData.account_password;
-    res.locals.accountData.account_firstname = accountData.account_firstname; // So it displays correctly
-    utilities.updateCookie(accountData, res); // Remake the cookie with new data
+    res.locals.accountData.account_firstname = accountData.account_firstname;
+    utilities.updateCookie(accountData, res); 
 
     res.status(201).render("account/account-management", {
       title: "Management",
